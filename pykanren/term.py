@@ -3,7 +3,6 @@ from enum import Enum
 from typing import Any, Type
 import uuid
 
-@dataclass
 class Term:
   def __add__(lhs, rhs):
     return BinaryExpr(lhs, term(rhs), BinaryOp.PLUS)
@@ -27,13 +26,13 @@ class Term:
     return BinaryExpr(lhs, term(rhs), BinaryOp.OR)
 
 
-@dataclass
+@dataclass(frozen=True)
 class Empty(Term):
   def __repr__(self):
     return "None"
 
 
-@dataclass
+@dataclass(frozen=True)
 class Value(Term):
   type: Type
   value: Any
@@ -42,7 +41,7 @@ class Value(Term):
     return f"{self.type}({self.value})"
 
 
-@dataclass
+@dataclass(frozen=True)
 class Pair(Term):
   p: Term
   q: Term
@@ -51,7 +50,7 @@ class Pair(Term):
     return f"({self.p}, {self.q})"
 
 
-@dataclass
+@dataclass(frozen=True)
 class Var(Term):
   name: str
 
@@ -69,7 +68,7 @@ class BinaryOp(Enum):
   OR = '|'
 
 
-@dataclass
+@dataclass(frozen=True)
 class BinaryExpr(Term):
   lhs: Term
   rhs: Term

@@ -2,6 +2,7 @@ import operator
 from typing import Iterable, Optional
 from .term import BinaryOp, Term, term
 
+
 OPERATOR_IMPLS = {
   BinaryOp.PLUS: operator.add,
   BinaryOp.MINUS: operator.sub,
